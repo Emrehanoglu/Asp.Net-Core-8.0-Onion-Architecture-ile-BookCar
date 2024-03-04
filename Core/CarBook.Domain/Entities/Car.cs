@@ -19,4 +19,6 @@ public class Car
     public byte Luggage { get; set; } //bagaj sayısı
     public string Fuel { get; set; } //yakıt türü
     public string BigImageUrl { get; set; } //aracın büyük görseli
+    public List<CarFeature> CarFeatures { get; set; }
+    public List<CarDescription> CarDescriptions { get; set; }
 }
