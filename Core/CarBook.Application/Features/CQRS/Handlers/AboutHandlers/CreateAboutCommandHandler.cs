@@ -12,7 +12,7 @@ namespace CarBook.Application.Features.CQRS.Handlers.AboutHandlers;
 public class CreateAboutCommandHandler
 {
 	private readonly IRepository<About> _repository;
-
+	//
 	public CreateAboutCommandHandler(IRepository<About> repository)
 	{
 		_repository = repository;
