@@ -22,7 +22,7 @@ public class CarPricingRepository : ICarPricingRepository
     public List<CarPricing> GetCarPricingWithCars()
     {
         var values = _carBookContext.CarPricings.Include(x => x.Car).ThenInclude(y => y.Brand)
-            .Include(z => z.Pricing).ToList();
+            .Include(z => z.Pricing).Where(t => t.PricingId==2).ToList();
         return values;
     }
 }

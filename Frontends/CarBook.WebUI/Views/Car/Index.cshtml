@@ -1,5 +1,5 @@
-﻿@using CarBook.Dto.CarDtos
-@model List<ResultCarWithBrandDto>
+﻿@using CarBook.Dto.CarPricingDtos
+@model List<ResultCarPricingWithCarDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/UILayout/Index.cshtml";
@@ -19,8 +19,8 @@
                         <div class="text">
                             <h2 class="mb-0"><a href="car-single.html">@item.Model</a></h2>
                             <div class="d-flex mb-3">
-                                <span class="cat">@item.BrandName</span>
-                                <p class="price ml-auto">₺500 <span>/Gün</span></p>
+                                <span class="cat">@item.Brand</span>
+                                <p class="price ml-auto">@item.Amount <span>/Gün</span></p>
                             </div>
                             <p class="d-flex mb-0 d-block">
                                 <a href="#" class="btn btn-primary py-2 mr-1">Hemen Kirala</a> 
