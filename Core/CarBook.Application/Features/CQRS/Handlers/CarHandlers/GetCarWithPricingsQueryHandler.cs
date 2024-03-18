@@ -21,18 +21,10 @@ public class GetCarWithPricingsQueryHandler
         var values = _carRepository.GetCarsWithPricings();
         return values.Select(x => new GetCarWithPricingQueryResult
         {
-            BigImageUrl = x.BigImageUrl,
-            BrandId = x.BrandId,
-            BrandName = x.Brand.Name,
-            CarId = x.CarId,
-            CoverImageUrl = x.CoverImageUrl,
-            Fuel = x.Fuel,
-            Km = x.Km,
-            Luggage = x.Luggage,
-            Model = x.Model,
-            Seat = x.Seat,
-            Transmission = x.Transmission,
-            PricingAmount = x.CarPricings.Amo
+            Model = x.Car.Model,
+            CoverImageUrl = x.Car.CoverImageUrl,
+            BrandName = x.Car.Brand.Name,
+            PricingAmount = x.Amount
         }).ToList();
     }
 }

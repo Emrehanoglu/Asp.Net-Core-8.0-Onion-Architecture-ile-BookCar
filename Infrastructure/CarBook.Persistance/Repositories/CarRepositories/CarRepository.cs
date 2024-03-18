@@ -24,10 +24,10 @@ public class CarRepository : ICarRepository
 		return values;
 	}
 
-    public List<Car> GetCarsWithPricings()
+    public List<CarPricing> GetCarsWithPricings()
     {
-		var values = _carBookContext.Cars.Include(x => x.Brand).Include(y => y.CarPricings)
-			.ThenInclude(z => z.Pricing).ToList();
+		var values = _carBookContext.CarPricings.Include(x => x.Car).ThenInclude(y => y.Brand)
+			.Include(z => z.Pricing).ToList();
 		return values;
     }
 
