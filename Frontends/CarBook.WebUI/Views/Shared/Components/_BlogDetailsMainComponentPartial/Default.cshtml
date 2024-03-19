@@ -12,108 +12,13 @@
         <img src="images/image_7.jpg" alt="" class="img-fluid">
     </p>
 
-    <div class="tag-widget post-tag-container mb-5 mt-5">
-        <div class="tagcloud">
-            <a href="#" class="tag-cloud-link">Life</a>
-            <a href="#" class="tag-cloud-link">Sport</a>
-            <a href="#" class="tag-cloud-link">Tech</a>
-            <a href="#" class="tag-cloud-link">Travel</a>
-        </div>
-    </div>
+    @await Component.InvokeAsync("_BlogDetailsCloudTagByBlogComponentPartial")
 
-    <div class="about-author d-flex p-4 bg-light">
-        <div class="bio mr-5">
-            <img src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
-        </div>
-        <div class="desc">
-            <h3>George Washington</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-        </div>
-    </div>
-
+    @await Component.InvokeAsync("_BlogDetailsAuthorAboutComponentPartial")
 
     <div class="pt-5 mt-5">
         <h3 class="mb-5">6 Comments</h3>
-        <ul class="comment-list">
-            <li class="comment">
-                <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Image placeholder">
-                </div>
-                <div class="comment-body">
-                    <h3>John Doe</h3>
-                    <div class="meta">Oct. 29, 2019 at 1:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                </div>
-            </li>
-
-            <li class="comment">
-                <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Image placeholder">
-                </div>
-                <div class="comment-body">
-                    <h3>John Doe</h3>
-                    <div class="meta">Oct. 29, 2019 at 1:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                </div>
-
-                <ul class="children">
-                    <li class="comment">
-                        <div class="vcard bio">
-                            <img src="images/person_1.jpg" alt="Image placeholder">
-                        </div>
-                        <div class="comment-body">
-                            <h3>John Doe</h3>
-                            <div class="meta">Oct. 29, 2019 at 1:21pm</div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                            <p><a href="#" class="reply">Reply</a></p>
-                        </div>
-
-
-                        <ul class="children">
-                            <li class="comment">
-                                <div class="vcard bio">
-                                    <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3>John Doe</h3>
-                                    <div class="meta">Oct. 29, 2019 at 1:21pm</div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                    <p><a href="#" class="reply">Reply</a></p>
-                                </div>
-
-                                <ul class="children">
-                                    <li class="comment">
-                                        <div class="vcard bio">
-                                            <img src="images/person_1.jpg" alt="Image placeholder">
-                                        </div>
-                                        <div class="comment-body">
-                                            <h3>John Doe</h3>
-                                            <div class="meta">Oct. 29, 2019 at 1:21pm</div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                            <p><a href="#" class="reply">Reply</a></p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="comment">
-                <div class="vcard bio">
-                    <img src="images/person_1.jpg" alt="Image placeholder">
-                </div>
-                <div class="comment-body">
-                    <h3>John Doe</h3>
-                    <div class="meta">Oct. 29, 2019 at 1:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                </div>
-            </li>
-        </ul>
+        @await Component.InvokeAsync("_CommentListByBlogComponentPartial")
         <!-- END comment-list -->
 
         <div class="comment-form-wrap pt-5">
