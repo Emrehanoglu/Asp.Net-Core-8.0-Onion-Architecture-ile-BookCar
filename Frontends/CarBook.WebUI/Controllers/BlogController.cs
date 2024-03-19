@@ -22,7 +22,7 @@ public class BlogController : Controller
         if (responseMessage.IsSuccessStatusCode)
         {
             var jsonData = await responseMessage.Content.ReadAsStringAsync();
-            var values = JsonConvert.DeserializeObject<ResultAllBlogsWithAuthorsDto>(jsonData);
+            var values = JsonConvert.DeserializeObject<List<ResultAllBlogsWithAuthorsDto>>(jsonData);
             return View(values);
         }
         return View();
