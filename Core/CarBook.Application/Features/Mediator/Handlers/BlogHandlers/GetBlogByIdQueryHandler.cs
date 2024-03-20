@@ -29,7 +29,8 @@ public class GetBlogByIdQueryHandler : IRequestHandler<GetBlogByIdQuery, GetBlog
             CategoryId = value.CategoryId,
             CoverImageUrl = value.CoverImageUrl,
             CreatedDate = value.CreatedDate,
-            Title = value.Title
+            Title = value.Title,
+            Description = value.Description
         };
     }
 }
