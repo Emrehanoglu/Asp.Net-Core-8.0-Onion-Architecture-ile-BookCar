@@ -25,6 +25,12 @@ public class BlogRepository : IBlogRepository
         return values;
     }
 
+    public Blog GetBlogWithAuthorByBlogId(int id)
+    {
+        var value = _carBookContext.Blogs.Include(x => x.Author).Where(y => y.BlogId == id).FirstOrDefault();
+        return value;
+    }
+
     public List<Blog> GetLast3BlogsWithAuthors()
     {
         var values = _carBookContext.Blogs.Include(x => x.Author).OrderByDescending(x => x.BlogId).Take(3).ToList();
