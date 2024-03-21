@@ -8,7 +8,7 @@
         <img src="images/image_7.jpg" alt="" class="img-fluid">
     </p>
 
-    @await Component.InvokeAsync("_BlogDetailsCloudTagByBlogComponentPartial")
+    @await Component.InvokeAsync("_BlogDetailsCloudTagByBlogComponentPartial", new {id=ViewBag.blogid})
 
     @await Component.InvokeAsync("_BlogDetailsAuthorAboutComponentPartial")
 
