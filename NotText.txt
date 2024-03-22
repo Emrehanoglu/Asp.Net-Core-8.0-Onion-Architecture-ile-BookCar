@@ -1,0 +1,165 @@
+-- En son adýmlarýný burada aklýmda kaldýðý kadar tekrar edeceðim. Son kýsýmlarda Blog 
+arayüzü ile ilgileniyordum. Blog arayüzü sistemi kullanarak login olup login öncesi tabi register
+olmasý gerekiyorsa register olup sistemi kullanan müþterilerin fikirlerini beyan ettiði ve 
+yayýmladýðý kýsýmdýr.
+
+-- Blog arayüzünü ilk yazdýgýmda bu arayüzde veritabanýndaki Blog tablosundaki verilerimin
+hepsini belirili bür þablon düzeninde listeledim, yani diðüer kullanýcýlara gösterdim.
+
+-- Her bir yayýmlana blogun da kendisine ait detay sayfasý bulunmakta. Bu sayfaya gidebilmek için
+her blogun altýnda bulunan Devamý Oku butonuna týklanmasý gerekiyor. Ýlgili blogun Devamýný Oku
+butonun týklanmýssa eðer blogun id 'si ile birlikte yeni bir arayüze yönlendirilir.
+
+-- Bu arayüzün adý da BlogDetail 'dir.
+
+-- BlogDetail sayfasýna gelen kullanýcý ne ile karþýlaþýr? Bu sayfada kullanýcýyý karþýlayan
+varsa uzun bir blog acýklamasý göze carparak karsýlar. Bu yazýnýn devamýnda bu yazýyý yazan
+kiþinin yani yazar kiþisinin bilgilerinin gösterildiði bir alan karsýmýza cýkar.
+
+-- Bu bilgilerin devamýnda ilgili blog için farklý kullanýcýlar tarafýnda yapýlan yorumlar
+arayüzde listelenmiþ durumdadýr.
+
+-- Yapýlan olumlu veya olumsuz tüm yorumlarýn ardýndan yeni bir yorum býrakma alaný bizi 
+karþýlar. Bu alanda tabi backend tarafýnda bu arayüzde tek bir defa gönderilen Post requesti
+gercekleþtirilir.
+
+-- Ekranýn büyük cogunlugunu bu alanlar kapsar. Geri kalan kýsýmlar ise ekranýn sað tarafýnda
+yer alýr. Bu alan bir sidebar büyüküðündedir. Bu alanda peki neler var. Bu alan üzerinde ilk olarak
+ilgili blog 'u temsil eden etiketler bulunmaktadýr. Ardýndan bu blog ve diðer blog 'larýn 
+bulunduðu kategori listesi bizi karsýlar. 
+
+-- Bu arayüz üzerinde cok uzun html kodlarý bulunduðu için bir cok ViewComponent ile ayýrarak
+calýstým. BU þekilde consume iþlemlerini cok daha rahat ve baþarýlý þekilde gercekleþtirdim.
+
+-- Bloglarýn hangi kategorilere ait olduðunun tutulduðu tablo ise Categories tablosudur. Yani
+Category entity 'sidir.
+
+-- Program.cs içerisinde yaptýðým konfigürasyonlarý incelediðimde, handler konfigürasyonu 
+yaptýðým tüm entityler CQRS design pattern 'i ile yazýldýðýný gördüm. Bu design pattern 'in
+bu gibi dezavantajlarý var. Yonetimi zor ve kod tekrarý cok fazla. Bu nedenle zaten
+projenin devamýnda CQRS 'den sonra Mediator design pattern 'ine geçiþ yapmýsým.
+
+-- Navbar kýsmý github üzerinden inceledim de UILayout altýnda ben arayüzümün dinamik olmayan
+kýsmýný hazýrlamýþtým. Bu arayüzde navbar kýsmýný _NavbarUILayoutComponentPartial adýnda bir
+ViewComponent ile ayýrmýþým. Ardýndan buranýn içerisinde navbar 'ý Türkceleþtirmiþi. Gayette
+temiz bir kod yazýmý olmuþ, arayüz kýsmýný tasarlerken. Bu kýsmý notlarým arasýnda tutacaðým.
+
+-- Program.cs içerisinde Handler konfigürasyonlarý dýsýnda bir konfigürasyon yapýsý daha 
+bulunuyor. Bu yapýyýyý da kendim yazmýsým. Bu yapý da þunu karþýlýyor;  Þimdi ben generic olan
+IRepository içerisinde , List,GetById,Creeate,Update,Remove metotlarýný yazmýstým. Bu metotlar
+her entity için gecerli olan, kullanýlan metotlar. 
+
+-- Bu metotlarýn dýsýnda ben entity ' özgü bir metot yazacaksam, entity 'e özgü metot þudur;
+örneðin blog için backend yani api tarafýnda son 3 blogun author bilgisi ile birlikte gelmesini
+saðlamak istiyorum, bu senaryoyu ya da bu requesti Irepository içerisinde yazdýðým List,GetByýd,
+Create,Update ve Remove metotlarý içerisinden hiçbiri karsýlamamaktadýr.
+
+-- Dolayýsýyla bu ihtiyaç Blog için gecerli olduðu için Blog özeline bir repository tanýmlaayýp
+bu repýository içerisinde ihtiyacým olan metodu yazmýsým.
+
+-- Yazdýðým bu kendi özgü repository 'lerinde Program.cs tarafýnda konfigürasyonlarýný 
+gercekleþtirmiþim. Program.cs içerisinde Handler dýsýnda konfigürasyonlarýný gercekleþtirdiðim
+yapý da bu.
+
+-- Biraz solution explorer yapýsýný çýkartacaðým. Totalde 4 folder var. Bunlar , Core,Frontends,
+Infrastructure, Presentation.
+
+-- Core folder 'ý içerisinde neler var. Core folder 'ý içerisinde Application ve Domain
+katmanlarým var. Domain katmaný kendini belli ediyor zaten. Domain içerisinde sadece entitylerim
+var. Application katmaný altýnda ise Features, Services ve Interfaces folder 'larým var. Features
+folder 'ým altýnda tasarým desenlerim var. Bu desenler CQRS ve Meditor tasarým desenleri. 
+Interfaces folder 'ý içerisinde ise Generic olan IRepository ve Entity 'e özgü metot yazmak
+için oluþturduðum entity özelindeki Repository 'ler bulunmaktadýr. Son olarak Services folder 'ý
+içerisinde de IServiceCollection içerisine eklediðim Mediator design pattern konfigürastonu
+yapýsý bulunmaktadýr.
+
+-- Bu konfigürasyon sayesinde CQRS design pattern 'indeki gibi tüm handler 'larýn Program.cs
+içerisinde tek tek inject edilmesinin önüne geçmiþ oluyorum.
+
+-- Solution altýndaki Core folder 'ýmdan sonra Infrastructure folder 'ýmýn içerisini 
+inceleyeceðim. Infrastructure folder 'ý içerisinde Persistance adýnda 1 tane katman bulunuyor ve
+bu katmanýn altýnda 3 tane folder bulunmaktadýr. Bunlar Context, Migration ve Repositories. 
+Context folder 'ým ayný Domain katmaný gibi kendini belli ediyor zaten. Bu folder 'ýn içerinde
+veritabanýma baglanmak için yazdýðý connectionString ve veritabanýna yansýtacaðým entity 'lerin
+DbSet konfigürasyonlarý bulunmaktadýr. Bir diðer folder 'ým olan Migration folder 'ým için
+anlatacaðým cok bir detay yok aslýnda. Bu folder ve içerisindeki dosyalar kendiliðinden
+oluþmaktadýr. Veritabanýna PackageManagerConsole üzerinden komutlar ile yaptýðým migration
+iþlemlerimin ardýndan Migration adýndaki bu folder oluþmakta. Infrastructure folderým altýndaki 
+Persistance katmaným altýndaki 3. folder 'ým olan Repositories folder 'ýma geçiyorum. Bu folder
+içerisinde Generic Repository class 'ým ve Entity 'e özgü metot imzalarýmýn implemente edilip
+içerisinin yazýlacaðý ve veritabanýndan verilerin alýnacaðým TRepository class 'larým bulunmaktadýr.
+
+-- Core				------> Featrues - Services - Interfaces
+-- Infrastructure   ------> Persistance ------> Context - Migrations - Repositories
+
+-- Solution altýndaki bir diðer folder 'a incelemeye geçiyorum. Yani Presentation folder 'ý. Bu
+folder altýnda WebApi katmaným bulunuyor. Bu katman zaten kendini belli ediyor. Bu katman içerisinde
+içerisinde CQRS ve Mediator design pattern 'leri içerisinde yazdýðý Handler 'larý consume eden
+ApiController 'larýmý tanýmladýðým Controller folder 'ým ve Proje bazýnda konfigürasyonlarýmý 
+geçitðim Program.cs dosyasý bulunmaktadýr. Program.cs dosyasýn detaylý bir þekilde deðiþnmiþtim 
+zaten.
+
+-- ApiController 'lara biraz detaylý deðinmeye calýsacaðým. Bir kere ApiController 'ý MvcController 'dan
+ayýran ayýrt edici kýsýmlardan birisi ApiController içeriisnde bir Route yapýsý ve bu Route yapýsý ile
+Swagger üzerinden test 'ler gercekleþtiriliyor. ApiController 'ýn bir arayüzü olmaz. MvcController 'ýn
+ise Swagger üzerinden test edilmesi söz konusu deðilde fakat MvcController 'da arayüzler yani
+cshtml dosyalarý mevcuttur. ApiController içerisinde eðer CQRS tasarým deseni üzerinde yazýlmýþ 
+metotlarý kullanacaksam Handler dosyalarýný inject etmem gerekiyor, eðer Mediator design pattern 'i
+üzerinde yazýlmýþ Handler metotlarýný kullanacak isem sadece IMediator interface 'inin inject etmem
+gerekiyor. Injectler 'den sonra ApiContoller içerisinde request tiplerim var. Her metodun
+request tipi farklý olabilir.
+
+-- Bu proje cercevesinde kullandýðým request tipleri : HttpGet, HttpPost, HttpPut, HttpDelete ve
+HttpGet("{id}").
+
+-- HttpGet ve HttpGet("{id}") requestlerim okuma iþlemi için kullanýlýr. Okuma iþlemi demek veritabaný
+üzerindeki verilere dokunmayacaðým onlarý sadece almak istiyorum cekmek istiyorum demektir.
+
+-- HttpPut, HttpPost ve HttpDelete gibi requestler ise yazma iþlemi için kullanýlýr. Yazma iþlemi
+demek veritabanýndaki veriler üzerinde deðiþikliði yapacaðým demektir.
+
+-- ApiController genel cercevede bunlardan oluþmaktadýr.
+
+-- Þimdi de Solution 'ým altýndaki son folder 'ým olan Frontends folder 'ýma biraz deðineceðim. Bu 
+folder 'ým içerisinde WebUI ve Dto katmanlarý bulunmaktadýr. Önce Dto katmaný ile baþlayacaðým.
+Dto katmaný þu iþe yarýyor, WebUý içerisi projemin frontendine karsýlýk gelmektedir. Frontedn
+içerisinde Backend tarafýný yani WebApi kýsmýný consume ediyorum. Consume iþlemimin sonrasýnda bana
+bir veri deseni geliyor. Bu verileri mapleyeceðim bir þablon gerekiyor. Þablona ihtiyac duymamýn 
+nedeni ara yüzde verileri kullanýcýya gösterirken temiz bir kod yazýmý ile bunu gercekleþtirebileyim.
+Ýþte bu noktada dto katmaným içerisinde yazdýðým dto sýnýflarý mapleyeceðim þablon görevi gören 
+sýnýflarý temsil etmektedir.
+
+-- WebUI kýsmýna gelecek olursam ise bu katman altýnda kullanýcýnýn gördüðü arayüzlerin tutulduðu
+kýsýmlar bulunmaktadýr. Bu kýsýmlar Controller folder 'ý altýndaki MvcController 'larým 
+içerisindeki metotlarýma ait cshtml 'ler içerisinde tutulmaktadýr. Bu cshtml dosyalarý WebUI
+katmanýnýn View klasçrü altýnda tutulmaktadýr. Her bir Controller oluþturduðumda bu Controller 'ýn
+adý ile Views folder 'ý altýnda yený bir folder oluþturulur ve bu folder içerisinde ilgili 
+Controller içerisindeki metotlarýn adlarý ile cshtml dosyalarý oluþur. 
+
+-- Bunun dýþýnda bir de 
+ViewComponents folder 'ým bulunmaktadýr. bu folder 'ýmýn oluþturulmasýnýn nedeni, cshtml dosyalarý 
+bazen cok cok uzun kod satýrlarýndan oluabiliyor ve bu satýrlarýný bölerek çalýþma ihtiyacý doðabiliyor
+Bölerek calýsmak da alsýnda daha kolay kod yönetimini saðlýyor. Dolayýsýyla cshtml dosyalarýnýn
+bölünerek ayrýþtýrýlmasý sonucu ayýþtýrýlan her kod bloklarý bu ViewComponents folder 'ý altýnda
+tutulmaktadýr.
+
+-- Bu viewComponent dosyalarýnýn bir cs tarafý bir de cshtml taraflarý olmaktadýr. cshtml tarafý
+WebUI katmaný altýndaki shared folder 'ý içerisinde, cs tarafý ise ViewComponents folder 'ý 
+içerisinde tutulmaktadýr.
+
+-- Bu viewComponent dosyalarýnýn bir cs tarafý bir de cshtml taraflarý olmaktadýr. csmtl tarafý WebUI kat
+katmaný altýndaki shared folder 'ý altýndaki Components folder 'ý altýnda , cs tarafý ise 
+ViewComponen folder 'ý altýnda tutulmaktadýr.
+
+
+
+
+
+
+
+
+
+
+
+
+
