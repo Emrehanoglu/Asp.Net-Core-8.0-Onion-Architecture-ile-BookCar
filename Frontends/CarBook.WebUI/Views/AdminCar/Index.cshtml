@@ -1,6 +1,10 @@
-﻿@{
+﻿@using CarBook.Dto.CarDtos
+@model List<ResultCarWithBrandDto>
+
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
 }
 
 <div class="page-content">
@@ -19,36 +23,37 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Username</th>
+                                        <th>Marka</th>
+                                        <th>Model</th>
+                                        <th>Vites</th>
+                                        <th>Kilometre</th>
+                                        <th>Sil</th>
+                                        <th>Güncelle</th>
+                                        <th>Detaylar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>twitter</td>
-                                    </tr>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <th scope="row">@count</th>
+                                            <td>@item.BrandName</td>
+                                            <td>@item.Model</td>
+                                            <td>@item.Transmission</td>
+                                            <td>@item.Km</td>
+                                            <td><a href="/AdminCar/RemoveCar/@item.CarId" class="btn btn-danger">Sil</a></td>
+                                            <td><a href="/AdminCar/UpdateCar/@item.CarId" class="btn btn-primary">Güncelle</a></td>
+                                            <td><a href="/AdminCar/CarDetail/@item.CarId" class="btn btn-dark">Detaylar</a></td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
+                            <a href="/AdminCar/CreateCar/" class="btn btn-success">Yeni Araç Girişi</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> <!-- container-fluid -->
+    </div>
 </div>

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CarBook.Dto.CarDtos;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace CarBook.WebUI.Controllers;
 
@@ -14,7 +16,13 @@ public class AdminCarController : Controller
     public async Task<IActionResult> Index()
     {
         var client = _httpClientFactory.CreateClient();
-        var responseMessage = await client.GetAsync("https://localhost:7195/api/Cars/");
+        var responseMessage = await client.GetAsync("https://localhost:7195/api/Cars/GetCarWithBrand");
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<List<ResultCarWithBrandDto>>(jsonData);
+            return View(values);
+        }
         return View();
     }
 }
