@@ -16,4 +16,16 @@ public class AdminLayoutController : Controller
     {
         return PartialView();
     }
+    public IActionResult AdminSidebarPartial()
+    {
+        return PartialView();
+    }
+    public IActionResult AdminFooterPartial()
+    {
+        return PartialView();
+    }
+    public IActionResult AdminScriptPartial()
+    {
+        return PartialView();
+    }
 }
