@@ -12,4 +12,8 @@ public class AdminLayoutController : Controller
     {
         return PartialView();
     }
+    public IActionResult AdminNavbarPartial()
+    {
+        return PartialView();
+    }
 }
