@@ -17,7 +17,7 @@
                             tamamlayabilirsiniz.
                         </p>
 
-                        <form>
+                        <form method="post">
                             <div class="form-group">
                                 <label for="exampleInputBrand">Marka</label>
                                 @Html.DropDownListFor(x => x.BrandId,(List<SelectListItem>)ViewBag.BrandValues, new {@class="form-control"})
