@@ -98,4 +98,17 @@ public class AdminCarController : Controller
         }
         return View();
     }
+    [HttpPost]
+    public async Task<IActionResult> UpdateCar(UpdateCarDto updateCarDto)
+    {
+        var client = _httpClientFactory.CreateClient();
+        var jsonData = JsonConvert.SerializeObject(updateCarDto);
+        StringContent stringContent = new StringContent(jsonData,Encoding.UTF8,"application/json");
+        var responseMessage = await client.PutAsync("https://localhost:7195/api/Cars",stringContent);
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            return RedirectToAction("Index");
+        }
+        return View();
+    }
 }
