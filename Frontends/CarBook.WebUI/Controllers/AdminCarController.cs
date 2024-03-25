@@ -12,7 +12,7 @@ public class AdminCarController : Controller
     {
         _httpClientFactory = httpClientFactory;
     }
-
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
         var client = _httpClientFactory.CreateClient();
@@ -23,6 +23,11 @@ public class AdminCarController : Controller
             var values = JsonConvert.DeserializeObject<List<ResultCarWithBrandDto>>(jsonData);
             return View(values);
         }
+        return View();
+    }
+    [HttpGet]
+    public IActionResult CreateCar()
+    {
         return View();
     }
 }
