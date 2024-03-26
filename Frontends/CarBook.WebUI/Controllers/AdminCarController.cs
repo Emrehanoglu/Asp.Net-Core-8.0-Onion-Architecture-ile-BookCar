@@ -44,6 +44,7 @@ public class AdminCarController : Controller
                                                     Value = x.BrandId.ToString()
                                                 }).ToList();
             ViewBag.BrandValues = brandValues;
+            return View(values);
         }
         return View();
     }
