@@ -63,5 +63,34 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
             }
             return View();
         }
+
+        [Route("UpdateBanner/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> UpdateBanner(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync($"https://localhost:7195/api/Banners/" + id);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<UpdateBannerDto>(jsonData);
+                return View(values);
+            }
+            return View();
+        }
+        [Route("UpdateBanner/{id}")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateBanner(UpdateBannerDto updateBannerDto)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(updateBannerDto);
+            StringContent stringContent = new StringContent(jsonData,Encoding.UTF8,"application/json");
+            var responseMessage = await client.PutAsync($"https://localhost:7195/api/Banners",stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "AdminBanner", new { area = "Admin"});
+            }
+            return View();
+        }
     }
 }
