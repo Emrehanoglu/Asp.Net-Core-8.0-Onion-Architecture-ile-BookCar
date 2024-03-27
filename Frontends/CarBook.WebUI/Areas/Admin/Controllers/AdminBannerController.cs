@@ -36,17 +36,30 @@ namespace CarBook.WebUI.Areas.Admin.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [Route("CreateBanner")]
         public async Task<IActionResult> CreateBanner(CreateBannerDto createBannerDto)
         {
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBannerDto);
-            StringContent stringContent = new StringContent(jsonData,Encoding.UTF8,"application/json");
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var responseMessage = await client.PostAsync("https://localhost:7195/api/Banners", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index","AdminBanner", new { area = "Admin"});
+                return RedirectToAction("Index", "AdminBanner", new { area = "Admin" });
+            }
+            return View();
+        }
+
+        [Route("RemoveBanner/{id}")]
+        public async Task<IActionResult> RemoveBanner(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.DeleteAsync($"https://localhost:7195/api/Banners/" + id);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "AdminBanner", new { area = "Admin" });
             }
             return View();
         }
