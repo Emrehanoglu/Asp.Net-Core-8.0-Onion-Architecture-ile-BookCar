@@ -1,5 +1,6 @@
-﻿@using CarBook.Dto.BrandDtos
-@model List<ResultBrandDto>
+﻿@using CarBook.Dto.AuthorDtos
+@model List<ResultAuthorDto>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
@@ -14,9 +15,9 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Araba Markaları Listesi</h4>
+                        <h4 class="card-title">Yazar Paneli</h4>
                         <p class="card-subtitle mb-4">
-                            Arabalarla ilgili marka listesi, markalar üzerinde düzenleme ve bir markayı kaldırma 
+                            Yazarlarla ilgili marka listesi, yazarlar üzerinde düzenleme ve bir yazarı kaldırma
                             işlemini buradan gerçekleştirebilirsiniz.
                         </p>
                         <div class="table-responsive">
@@ -24,40 +25,35 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Marka Adı</th>
+                                        <th>Yazar</th>
+                                        <th>Açıklama</th>
+                                        <th>Görsel</th>
                                         <th>Sil</th>
                                         <th>Güncelle</th>
-                                        <th>Markaya Ait Araçlar</th>
+                                        <th>Yazarın Blogları</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        count++;
                                         <tr>
-                                            <th scope="row">@count</th>
+                                            count++;
+                                            <td>@count</td>
                                             <td>@item.Name</td>
-                                            <td><a href="/AdminBrand/RemoveBrand/@item.BrandId" class="btn btn-outline-danger">Sil</a></td>
-                                            <td><a href="/AdminBrand/UpdateBrand/@item.BrandId" class="btn btn-outline-success">Güncelle</a></td>
-                                            <td><a href="/AdminBrand/UpdateBrand/@item.BrandId" class="btn btn-outline-dark">Markaya Ait Araçlar</a></td>
+                                            <td>@item.Description</td>
+                                            <td>@item.ImageUrl</td>
+                                            <td><a href="/Admin/AdminAuthor/RemoveAuthor/@item.AuthorId" class="btn btn-outline-danger">Sil</a></td>
+                                            <td><a href="/Admin/AdminAuthor/UpdateAuthor/@item.AuthorId" class="btn btn-outline-success">Güncelle</a></td>
+                                            <td><a href="/Admin/AdminAuthor/UpdateAuthor/@item.AuthorId" class="btn btn-outline-primary">Git</a></td>
                                         </tr>
                                     }
                                 </tbody>
                             </table>
-                            <a href="/AdminBrand/CreateBrand/" class="btn btn-outline-primary">Yeni Marka Girişi</a>
+                            <a href="/Admin/AdminAuthor/CreateAuthor" class="btn btn-outline-primary">Yazar Bilgisi Girişi</a>
                         </div>
-
                     </div>
-                    <!-- end card-body-->
                 </div>
-                <!-- end card -->
-
             </div>
-            <!-- end col -->
-
         </div>
-        <!-- end page title -->
-
-    </div> <!-- container-fluid -->
+    </div>
 </div>
-
