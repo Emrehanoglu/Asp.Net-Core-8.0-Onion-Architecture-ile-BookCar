@@ -27,7 +27,6 @@
                                         <th>#</th>
                                         <th>Yazar</th>
                                         <th>Açıklama</th>
-                                        <th>Görsel</th>
                                         <th>Sil</th>
                                         <th>Güncelle</th>
                                         <th>Yazarın Blogları</th>
@@ -37,11 +36,9 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            count++;
-                                            <td>@count</td>
+                                            <td><img src="@item.ImageUrl" width="50" height="50" style="margin-right:10px" /></td>
                                             <td>@item.Name</td>
-                                            <td>@item.Description</td>
-                                            <td>@item.ImageUrl</td>
+                                            <td>@item.Description.Substring(0,10)...</td>
                                             <td><a href="/Admin/AdminAuthor/RemoveAuthor/@item.AuthorId" class="btn btn-outline-danger">Sil</a></td>
                                             <td><a href="/Admin/AdminAuthor/UpdateAuthor/@item.AuthorId" class="btn btn-outline-success">Güncelle</a></td>
                                             <td><a href="/Admin/AdminAuthor/UpdateAuthor/@item.AuthorId" class="btn btn-outline-primary">Git</a></td>
